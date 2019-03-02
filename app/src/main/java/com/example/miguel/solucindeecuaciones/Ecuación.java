@@ -60,5 +60,4 @@ public class Ecuación {
     public void setE(int e) {
         this.e = e;
     }
-    //Este comentario es una prueba de conexión con GitHub
 }
