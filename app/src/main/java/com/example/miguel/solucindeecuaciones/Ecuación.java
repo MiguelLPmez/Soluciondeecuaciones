@@ -60,4 +60,5 @@ public class Ecuación {
     public void setE(int e) {
         this.e = e;
     }
+
 }
