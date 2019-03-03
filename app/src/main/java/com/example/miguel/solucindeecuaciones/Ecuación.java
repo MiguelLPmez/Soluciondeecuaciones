@@ -12,12 +12,12 @@ public class Ecuación {
     }
 
     // - Regresa el valor de la función en el punto dado.
-    public double evaluarEn(int x){
+    public double evaluarEn(double x){
         return a * Math.pow(x, 4) + b * Math.pow(x, 3) + c * Math.pow(x, 2) + d * x  + e;
     }
 
     // - Regresa el valor de la derivada de la función en el punto dado.
-    public double derivadaEn(int x){
+    public double derivadaEn(double x){
         return 4 * a * Math.pow(x, 3) + 3 * b * Math.pow(x, 2) +  2 * c * x + d;
     }
 
