@@ -26,6 +26,12 @@ public class Algoritmo {
         return solución;
     }
 
+    // - Aplica el algoritmo de Bisección y regresa la solución.
+    public double getSoluciónBisección(double xi,double xu, double tol, int itmax){
+        algoritmoBisección(xi, xu, tol,  itmax);
+        return solución;
+    }
+
 
     /*              - Implementación de los algorimos -             */
 
@@ -46,6 +52,28 @@ public class Algoritmo {
             if (errorF <= tol) break;
             p0 = p1;
             p1 = solución;
+        }
+    }
+
+    private void algoritmoBisección(double xi, double xu, double tol, int itmax){
+        double iu;
+        errorF =  ((xi + xu) / 2) - xu;
+        for (int i = 0; i < itmax; i++){
+            solución = (xi + xu) / 2;
+            iu = ec.evaluarEn(xi) * ec.evaluarEn(solución);
+
+            if (ec.evaluarEn(iu) == 0) break;
+            else if (errorF <= tol) break;
+                else{
+                    if (iu < 0) {
+                        xu = solución;
+                        errorF = solución - xi;
+                    }
+                    if (iu > 0) {
+                        xi = solución;
+                        errorF = solución - xu;
+                    }
+                }
         }
     }
 
