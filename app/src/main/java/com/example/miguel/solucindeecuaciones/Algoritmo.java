@@ -63,7 +63,7 @@ public class Algoritmo {
             iu = ec.evaluarEn(xi) * ec.evaluarEn(solución);
 
             if (ec.evaluarEn(iu) == 0) break;
-            else if (errorF <= tol) break;
+            else if (Math.abs(errorF) <= tol) break;
                 else{
                     if (iu < 0) {
                         xu = solución;
