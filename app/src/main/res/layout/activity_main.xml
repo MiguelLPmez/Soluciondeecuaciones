@@ -132,28 +132,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Bisección" />
+                android:text="Bisección"
+                android:onClick="rGroupPerformed" />
 
             <RadioButton
                 android:id="@+id/newton_RButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Newton" />
+                android:text="Newton"
+                android:onClick="rGroupPerformed" />
 
             <RadioButton
                 android:id="@+id/secante_RB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Secante" />
+                android:text="Secante"
+                android:onClick="rGroupPerformed" />
 
             <RadioButton
                 android:id="@+id/regla_RB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Regla falsa" />
+                android:text="Regla falsa"
+                android:onClick="rGroupPerformed" />
         </RadioGroup>
     </LinearLayout>
 
@@ -240,7 +244,7 @@
                 android:text="Aproximación Inicial:" />
 
             <EditText
-                android:id="@+id/editText20"
+                android:id="@+id/aproximacion_ET"
                 android:layout_width="136dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -311,6 +315,7 @@
         android:layout_marginRight="28dp"
         android:layout_marginBottom="8dp"
         android:text="Calcular"
+        android:onClick="calculatePerformed"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/entradas_TableLatout"
