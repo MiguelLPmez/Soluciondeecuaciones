@@ -18,7 +18,12 @@ public class MainActivity extends AppCompatActivity {
     Button calcular;
     Algoritmo algoritmo;
 
-    public MainActivity(){
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+
         A = findViewById(R.id.A);
         B = findViewById(R.id.B);
         C = findViewById(R.id.C);
@@ -40,15 +45,6 @@ public class MainActivity extends AppCompatActivity {
         error = findViewById(R.id.errorFinal);
 
         calcular = findViewById(R.id.calcular_button);
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-
-        new MainActivity();
         calcular.setEnabled(false);
     }
 
@@ -84,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         double err = algoritmo.getErrorFinal();
 
         resultado.setText("Resultado: "+res);
-        error.setText("Error: "+error);
+        error.setText("Error: "+err);
 
         calcular.setEnabled(false);
     }
