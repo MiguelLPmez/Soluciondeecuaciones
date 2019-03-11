@@ -62,21 +62,21 @@ public class Algoritmo {
 
     private void algoritmoBisección(double xi, double xu, double tol, int itmax){
         double iu;
-        errorF =  ((xi + xu) / 2) - xu;
+        errorF =  Math.abs(((xi + xu) / 2) - xu);
         for (int i = 0; i < itmax; i++){
             solución = (xi + xu) / 2;
             iu = ec.evaluarEn(xi) * ec.evaluarEn(solución);
 
             if (ec.evaluarEn(iu) == 0) break;
-            else if (Math.abs(errorF) <= tol) break;
+            else if (errorF <= tol) break;
                 else{
                     if (iu < 0) {
                         xu = solución;
-                        errorF = solución - xi;
+                        errorF = Math.abs(solución - xi);
                     }
                     if (iu > 0) {
                         xi = solución;
-                        errorF = solución - xu;
+                        errorF = Math.abs(solución - xu);
                     }
                 }
         }
