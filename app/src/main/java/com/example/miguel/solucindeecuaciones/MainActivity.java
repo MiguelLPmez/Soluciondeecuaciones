@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         calcular.setEnabled(false);
     }
 
+    //Retorna el resultado de la funcion seleccionada y calcula el errorF en la clase Algoritmo
     private double doFunction(double p0, double p1, double tol, int itMax){
         double resultado;
         if(rGroup.getCheckedRadioButtonId() == biseccion.getId())
@@ -67,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         return resultado;
     }
 
+    //Escucha para le boton calcular
     public void calculatePerformed(View v){
         int a = Integer.parseInt(A.getText().toString());
         int b = Integer.parseInt(B.getText().toString());
@@ -90,6 +92,9 @@ public class MainActivity extends AppCompatActivity {
         calcular.setEnabled(false);
     }
 
+    //Escucha para cuando el usuario seleccione el metodo
+    // (debe de elegirlo una vez para que oculte los respectivos campos y otra vez cuando acabe de
+    //  introducir los campos)
     public void rGroupPerformed(View v){
         int id = rGroup.getCheckedRadioButtonId();
         if(id == biseccion.getId() ||  id == secante.getId() || id == reglaFalsa.getId()){
