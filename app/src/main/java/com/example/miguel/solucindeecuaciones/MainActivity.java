@@ -12,8 +12,8 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
     EditText A, B, C, D, E;
     RadioButton biseccion, newton, secante, reglaFalsa;
-    EditText tol, p0, p1, aproximacion;
-    TextView resultado, error;
+    EditText tol, p0, p1, itMax,aproxET;
+    TextView resultado, error, intervaloTV,aproxTV;
     RadioGroup rGroup;
     Button calcular;
     Algoritmo algoritmo;
@@ -39,7 +39,11 @@ public class MainActivity extends AppCompatActivity {
         tol = findViewById(R.id.tolerancia_EditText);
         p0 = findViewById(R.id.intervalo_a);
         p1 = findViewById(R.id.intervalo_b);
-        aproximacion = findViewById(R.id.aproximacion_ET);
+        itMax = findViewById(R.id.itmax);
+
+        intervaloTV = findViewById(R.id.entrada_desc);
+        aproxTV = findViewById(R.id.aproxInicial_desc);
+        aproxET = findViewById(R.id.aproximacion_ET);
 
         resultado = findViewById(R.id.resultadoFinal);
         error = findViewById(R.id.errorFinal);
@@ -57,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         else if(rGroup.getCheckedRadioButtonId() == secante.getId())
             resultado = algoritmo.getSoluciónSecante(p0,p1,tol,itMax);
         else if(rGroup.getCheckedRadioButtonId() == reglaFalsa.getId())
-            resultado = algoritmo.getSoluciónBisección(p0,p1,tol,itMax);
+            resultado = algoritmo.getSoluciónReglaFalsa(p0,p1,tol,itMax);
         else return 0;
 
         return resultado;
@@ -75,8 +79,9 @@ public class MainActivity extends AppCompatActivity {
         double p0 = Double.parseDouble(this.p0.getText().toString());
         double p1 = Double.parseDouble(this.p1.getText().toString());
         double tol = Double.parseDouble(this.tol.getText().toString());
+        int itMax = Integer.parseInt(this.itMax.getText().toString());
 
-        double res = doFunction(p0,p1,tol,4);
+        double res = doFunction(p0,p1,tol,itMax);
         double err = algoritmo.getErrorFinal();
 
         resultado.setText("Resultado: "+res);
@@ -85,21 +90,47 @@ public class MainActivity extends AppCompatActivity {
         calcular.setEnabled(false);
     }
 
-
-
     public void rGroupPerformed(View v){
+        int id = rGroup.getCheckedRadioButtonId();
+        if(id == biseccion.getId() ||  id == secante.getId() || id == reglaFalsa.getId()){
+            aproxTV.setVisibility(TextView.INVISIBLE);
+            aproxET.setVisibility(EditText.INVISIBLE);
+
+            //Para arreglar de selecciones anteriores
+            intervaloTV.setVisibility(TextView.VISIBLE);
+            p0.setVisibility(EditText.VISIBLE);
+            p1.setVisibility(EditText.VISIBLE);
+        }else if(id == newton.getId()){
+            intervaloTV.setVisibility(TextView.INVISIBLE);
+            p0.setVisibility(EditText.INVISIBLE);
+            p1.setVisibility(EditText.INVISIBLE);
+
+            //Para arreglar de selecciones anteriores
+            aproxTV.setVisibility(TextView.VISIBLE);
+            aproxET.setVisibility(EditText.VISIBLE);
+        }
         dataVerification();
     }
 
     private void dataVerification(){
+        //Condiciones necesarias en todos los casos
         if(A.getText().length() == 0 || B.getText().length() == 0 || C.getText().length() == 0 ||
                 D.getText().length() == 0 || E.getText().length() == 0 ||
-                tol.getText().length() == 0 || p0.getText().length() == 0 || p1.getText().length() == 0){
+                tol.getText().length() == 0 || p0.getText().length() == 0 || itMax.getText().length() == 0){
             calcular.setEnabled(false);
             rGroup.clearCheck();
         }else{
-            calcular.setEnabled(true);
-
+            //Condicion para Newton
+            if(aproxET.getVisibility() != EditText.INVISIBLE && aproxET.getText().length() != 0)
+                calcular.setEnabled(true);
+            //Condicion para Biseccion, Secante, Regla falsa
+            else if(p0.getVisibility() != EditText.INVISIBLE &&
+                    p0.getText().length() != 0 && p1.getText().length() != 0)
+                calcular.setEnabled(true);
+            else {
+                calcular.setEnabled(false);
+                rGroup.clearCheck();
+            }
         }
     }
 }

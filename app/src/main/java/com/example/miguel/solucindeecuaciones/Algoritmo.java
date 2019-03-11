@@ -32,6 +32,11 @@ public class Algoritmo {
         return solución;
     }
 
+    // - Aplica el algoritmo de Regla Falsa y regresa la solución.
+    public double getSoluciónReglaFalsa(double xi,double xu, double tol, int itmax){
+        algoritmoReglaFalsa(xi, xu, tol,  itmax);
+        return solución;
+    }
 
     /*              - Implementación de los algorimos -             */
 
