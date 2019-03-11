@@ -77,6 +77,27 @@ public class Algoritmo {
         }
     }
 
+    private void algoritmoReglaFalsa(double xi, double xu, double tol, int itmax){
+        double xo = (xi*ec.evaluarEn(xu)-xu*ec.evaluarEn(xi))/(ec.evaluarEn(xu)-ec.evaluarEn(xi));
+        double fxo = ec.evaluarEn(xo);
+
+        for (int i = 0; i < itmax; i++){
+            if(ec.evaluarEn(xi)*ec.evaluarEn(xu)>0) break;
+            else if(ec.evaluarEn(xi)*fxo>0){ //- Actualiza valor de xi
+                xi = xo;
+                xo = (xi*ec.evaluarEn(xu)-xu*ec.evaluarEn(xi))/(ec.evaluarEn(xu)-ec.evaluarEn(xi));
+                errorF = Math.abs(xo-xi);
+                solución = xo;
+                if(errorF<tol) break;
+            }else if(ec.evaluarEn(xi)*fxo<0){ //- Actualiza valor de xu
+                xu = xo;
+                xo = (xi*ec.evaluarEn(xu)-xu*ec.evaluarEn(xi))/(ec.evaluarEn(xu)-ec.evaluarEn(xi));
+                errorF = Math.abs(xo-xi);
+                solución = xo;
+                if(errorF<tol) break;
+            }
+        }
+    }
     /*          De versión anterior de la clase:
 
     // - Crear aqui los metodos bisección, newton, secante y regla falsa.
